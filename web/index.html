@@ -1,0 +1,28 @@
+echo nvPressPanel Installer
+
+function install_debian()
+{
+  system=debian
+  echo -e "\033[1m\033[32m[INFO]\033[0m 检测到Debian系系统，正在更新Apt......"
+  sudo apt update
+  sudo apt install curl wget python3 python3-pip -y
+  sudo wget https://get.nvpress.tk/install.py 
+  sudo python3 install.py $system
+}
+function install_redhat()
+{
+  system=redhat
+  echo -e "\033[1m\033[32m[INFO]\033[0m 检测到Redhat系系统，正在更新Yum......"
+  sudo yum install curl wget python3 python3-pip -y
+  sudo wget https://get.nvpress.tk/install.py 
+  sudo python3 install.py $system
+}
+# 判断当前用户是否有sudo权限
+sudo -v &>/dev/null
+if [ $? != 0 ]; then
+  rooted=false
+  exit -1
+else
+  rooted=true
+fi
+[ -f /etc/redhat-release ] && install_redhat || install_debian
