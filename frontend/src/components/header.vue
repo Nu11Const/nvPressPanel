@@ -36,6 +36,7 @@
 <script lang="ts">
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+
 export default defineComponent({
   components: {
     UserOutlined,

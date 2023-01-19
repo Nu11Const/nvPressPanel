@@ -40,6 +40,18 @@ def get_container_install_status():
     else:
         return "undefined"
     
+@app.route('/api/get_caddyfile',methods=['GET'])
+def get_caddyfile():
+    caddyfile = open("/etc/caddy/Caddyfile", encoding='utf-8').read()
+    return(json.dumps(caddyfile))
+
+@app.route("/api/uploadtext",methods=['GET'])
+def uploadtext_file():
+    gettext = request.args.get('text','')
+    with open("/etc/caddy/Caddyfile", 'w') as file_object:
+        file_object.write(gettext)
+    return "200 successful"
+    
 @app.route('/')
 def hello_world():
     return render_template("index.html")

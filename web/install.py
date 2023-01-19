@@ -40,7 +40,8 @@ def installCaddy():
 
 def installPanel():
     print("\033[1m\033[32m[INFO]\033[0m 正在启动安装面板主进程......")
-    os.system("wget -O panel.zip https://get.nvpress.tk")
+    os.system("wget -O panel.zip https://get.nvpress.tk/panel.zip")
+    
      
 if __name__=='__main__':
     global system 
