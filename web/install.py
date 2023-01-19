@@ -38,6 +38,10 @@ def installCaddy():
     elif (system == "redhat"):
         os.system("sudo yum install yum-plugin-copr -y && yum copr enable @caddy/caddy -y && yum install caddy -y")
 
+def installPanel():
+    print("\033[1m\033[32m[INFO]\033[0m 正在启动安装面板主进程......")
+    os.system("wget -O panel.zip https://get.nvpress.tk/panel.zip")
+    
      
 if __name__=='__main__':
     global system 
@@ -52,3 +56,4 @@ if __name__=='__main__':
         installVsftpd()
     else:pass
     installCaddy()
+    
