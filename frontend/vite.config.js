@@ -7,9 +7,6 @@ import PkgConfig from "vite-plugin-package-config";
 // https://vitejs.dev/config/
 export default defineConfig({
   /* ... */
-  define: {
-    global:{}
-  },
   plugins: [
     Components({
       resolvers: [AntDesignVueResolver()],
@@ -33,7 +30,6 @@ export default defineConfig({
   build: {
     sourcemap: false,
     minify: 'terser',
-    assetsDir: '../backend/static',
     chunkSizeWarningLimit: 1500,
     terserOptions: {
       compress: {
