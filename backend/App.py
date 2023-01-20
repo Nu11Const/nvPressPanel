@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request 
+from flask import Flask, redirect, render_template, request 
 import json
 from flask_cors import CORS, cross_origin
 import os
@@ -7,7 +7,12 @@ app=Flask(__name__, static_url_path='')
 
 @app.route('/api/list-files', methods=['GET'])
 def test():
-    return json.dumps(os.popen("ls").read())
+    gettoken = request.args.get('token','')
+    if(open("password.txt", encoding='utf-8').read() ==  gettoken):
+        return json.dumps(os.popen("ls").read())
+    else:
+         return redirect('/#/error/403')
+    
 
 @app.route('/api/get_auth',methods=['GET'])
 def get_auth():
@@ -20,15 +25,25 @@ def get_auth():
         return json.dumps("true")
     else:
         return json.dumps("false")
+    
 @app.route('/api/run_nvpress_docker_container',methods=['GET'])
 def run_nvpress_docker_container():
-    os.system("mkdir -vp /www/nvpress/{themes,content,plugins}")
-    os.system("docker run -d -p 8888:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest")
-    return "true"
+    gettoken = request.args.get('token','')
+    if(open("password.txt", encoding='utf-8').read() ==  gettoken):
+        os.system("mkdir -vp /www/nvpress/{themes,content,plugins}")
+        os.system("docker run -d -p 8888:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest")
+        return "true"
+    else:
+         return redirect('/#/error/403')
 
 @app.route('/api/restart_docker_service',methods=['GET'])
 def restart_docker_service():
-    return(json.dumps(os.popen("service docker restart").read()))
+    gettoken = request.args.get('token','')
+    if(open("password.txt", encoding='utf-8').read() ==  gettoken):
+        return(json.dumps(os.popen("service docker restart").read()))
+    else:
+         return redirect('/#/error/403')
+    
 
 @app.route('/api/get_container_install_status',methods=['GET'])
 def get_container_install_status():
@@ -47,10 +62,14 @@ def get_caddyfile():
 
 @app.route("/api/uploadtext",methods=['GET'])
 def uploadtext_file():
-    gettext = request.args.get('text','')
-    with open("/etc/caddy/Caddyfile", 'w') as file_object:
-        file_object.write(gettext)
-    return "200 successful"
+    gettoken = request.args.get('token','')
+    if(open("password.txt", encoding='utf-8').read() ==  gettoken):
+        gettext = request.args.get('text','')
+        with open("/etc/caddy/Caddyfile", 'w') as file_object:
+            file_object.write(gettext)
+        return "200 successful"
+    else:
+         return redirect('/#/error/403')
     
 @app.route('/')
 def hello_world():

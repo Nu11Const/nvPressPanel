@@ -35,13 +35,19 @@
 import router from "../router";
   import { defineComponent } from 'vue';
   import cookies from "vue-cookies";
+import axios from 'axios'
 import Docker_status from "./docker_status.vue";
-import restart_docker_service from "./restart_docker_service.vue";
 import Restart_docker_service from "./restart_docker_service.vue";
   export default defineComponent({
     setup() {
-        if (cookies.isKey("user_logined") == false) {
+        if (cookies.isKey("token") == false) {
             router.push("/login");
+        } else if (cookies.isKey("token") == true){
+          axios.get(`/api/get_auth?user=${cookies.get("username")}&password=${cookies.get("token")}`).then(res=>{
+            if(res.data == "false"){
+              router.push("/login");
+            }
+          })
         }
     },
     components: { Docker_status, Restart_docker_service }

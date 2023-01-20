@@ -24,10 +24,17 @@ import router from "../router";
   import { defineComponent } from 'vue';
   import cookies from "vue-cookies";
 import Nvpress_error from "./nvpress_error.vue";
+import axios from 'axios'
   export default defineComponent({
     setup() {
-        if (cookies.isKey("user_logined") == false) {
+        if (cookies.isKey("token") == false) {
             router.push("/login");
+        } else if (cookies.isKey("token") == true){
+          axios.get(`/api/get_auth?user=${cookies.get("username")}&password=${cookies.get("token")}`).then(res=>{
+            if(res.data == "false"){
+              router.push("/login");
+            }
+          })
         }
     },
     components: { Nvpress_error }

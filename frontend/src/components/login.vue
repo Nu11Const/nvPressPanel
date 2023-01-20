@@ -91,13 +91,15 @@ export default defineComponent({
               //console.log(result);
               if(result == "true"){
                 if(testvalue[2] == true){
-                  cookies.set("user_logined","true","7d")
+                  cookies.set("token",hash,"7d")
+                  cookies.set("username",testvalue[0],"7d")
                   visible.value = true;
                   
                   router.push({ path : "/"});
 
                 } else if (testvalue[2] == false){
-                  cookies.set("user_logined","true","1d")
+                  cookies.set("token",hash,"1d")
+                  cookies.set("username",testvalue[0],"1d")
                   visible.value = true;
                   
                   router.push({ path : "/"});
