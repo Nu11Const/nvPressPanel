@@ -4,6 +4,7 @@ import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import OptimizationPersist from "vite-plugin-optimize-persist";
 import PkgConfig from "vite-plugin-package-config";
+import monacoEditorPlugin from "vite-plugin-monaco-editor"
 // https://vitejs.dev/config/
 export default defineConfig({
   /* ... */
@@ -16,7 +17,11 @@ export default defineConfig({
     OptimizationPersist(),
   ],
   optimizeDeps: {
-    include: ["ant-design-vue","ant-design-vue/dist/antd.css","@ant-design/icons-vue"]
+    include: ["ant-design-vue","ant-design-vue/dist/antd.css","@ant-design/icons-vue",`monaco-editor/esm/vs/language/json/json.worker`,
+    `monaco-editor/esm/vs/language/css/css.worker`,
+    `monaco-editor/esm/vs/language/html/html.worker`,
+    `monaco-editor/esm/vs/language/typescript/ts.worker`,
+    `monaco-editor/esm/vs/editor/editor.worker`]
   },
   server: {
     proxy:{

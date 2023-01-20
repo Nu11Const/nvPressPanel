@@ -27,15 +27,22 @@ import Header from "../components/header.vue"
   </a-layout>
 </template>
 <script>
-  import router from "../router";
+import router from "../router";
   import { defineComponent } from 'vue';
   import cookies from "vue-cookies";
+import axios from 'axios'
   export default defineComponent({
-    setup(){
-      if(cookies.isKey("user_logined") == false){
-        router.push("/login");
-      }
-    }
+    setup() {
+        if (cookies.isKey("token") == false) {
+            router.push("/login");
+        } else if (cookies.isKey("token") == true){
+          axios.get(`/api/get_auth?user=${cookies.get("username")}&password=${cookies.get("token")}`).then(res=>{
+            if(res.data == "false"){
+              router.push("/login");
+            }
+          })
+        }
+    },
   })
   fetch('https://v1.hitokoto.cn')
     .then(response => response.json())

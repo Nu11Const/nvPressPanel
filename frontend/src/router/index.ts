@@ -31,6 +31,14 @@ export default createRouter({
     {
       path: '/login',
       component: () => import("../components/login.vue")
+    },
+    {
+      path: '/error/403',
+      component: () => import("../errors/403.vue")
+    },
+    {
+      path: '/:catchAll(.*)',
+      component: () => import("../errors/404.vue")
     }
   ]
 })
