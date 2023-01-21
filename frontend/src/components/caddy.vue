@@ -10,8 +10,8 @@
         </a-breadcrumb>
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
+          <Codemirror v-model="code" :save="save"/>
           <a-button type="primary" @click="upload_caddyfile">保存</a-button>
-          <codemirror/>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -20,12 +20,26 @@
 <script type="ts">
 import router from "../router";
 import codemirror from "./codemirror.vue";
-import { defineComponent } from 'vue';
+import { defineComponent , ref} from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
 import Codemirror from "./codemirror.vue";
 export default defineComponent({
+    mounted: function () {
+      axios.get("/api/get_caddyfile").then(res=>{
+        this.code = res.data;
+      })
+    },
+    methods: {
+      upload_caddyfile(){
+        let token = cookies.get("token")
+        axios.get(`/api/uploadtext?text=${this.code}&token=${token}`).then(res=>{
+          console.log(res.data)
+        })
+      }
+    },
     setup() {
+        let code = ref("e")
         if (cookies.isKey("token") == false) {
             router.push("/login");
         }
@@ -36,7 +50,11 @@ export default defineComponent({
                 }
             });
         }
+        return{
+          code,
+          save
+        }
     },
-    components: { Codemirror }
+    components: { codemirror }
 })
 </script>

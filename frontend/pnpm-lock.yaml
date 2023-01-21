@@ -4,18 +4,19 @@ specifiers:
   '@ant-design/icons-vue': ^6.1.0
   '@codemirror/lang-javascript': ^6.1.2
   '@codemirror/theme-one-dark': ^6.1.0
+  '@codemirror/view': ^6.7.3
+  '@jridgewell/sourcemap-codec': ^1.4.14
   '@types/node': ^18.11.18
   '@vitejs/plugin-vue': ^4.0.0
   ant-design-vue: ^3.2.15
   axios: ^1.2.2
+  codemirror: ^6.0.1
   js-sha256: ^0.9.0
-  monaco-editor: ^0.34.1
   terser: ^5.16.1
   typescript: ^4.9.4
   unplugin-vue-components: ^0.22.12
   vite: ^4.0.0
   vite-plugin-imp: ^2.3.1
-  vite-plugin-monaco-editor: ^1.1.0
   vite-plugin-optimize-persist: ^0.1.2
   vite-plugin-package-config: ^0.1.1
   vue: ^3.2.45
@@ -27,16 +28,17 @@ dependencies:
   '@ant-design/icons-vue': 6.1.0_vue@3.2.45
   '@codemirror/lang-javascript': 6.1.2
   '@codemirror/theme-one-dark': 6.1.0
+  '@codemirror/view': 6.7.3
+  '@jridgewell/sourcemap-codec': 1.4.14
   '@types/node': 18.11.18
   ant-design-vue: 3.2.15_vue@3.2.45
   axios: 1.2.2
+  codemirror: 6.0.1
   js-sha256: 0.9.0
-  monaco-editor: 0.34.1
   terser: 5.16.1
   typescript: 4.9.4
-  vite-plugin-monaco-editor: 1.1.0_monaco-editor@0.34.1
   vue: 3.2.45
-  vue-codemirror: 6.1.1_vue@3.2.45
+  vue-codemirror: 6.1.1_vhikcdkubtgbuxk47tdob2ofvi
   vue-cookies: 1.8.2
   vue-router: 4.0.13_vue@3.2.45
 
@@ -279,8 +281,10 @@ packages:
       '@babel/helper-validator-identifier': 7.19.1
       to-fast-properties: 2.0.0
 
-  /@codemirror/autocomplete/6.4.0:
+  /@codemirror/autocomplete/6.4.0_@codemirror+view@6.7.3:
     resolution: {integrity: sha512-HLF2PnZAm1s4kGs30EiqKMgD7XsYaQ0XJnMR0rofEWQ5t5D60SfqpDIkIh1ze5tiEbyUWm8+VJ6W1/erVvBMIA==}
+    peerDependencies:
+      '@codemirror/view': ^6.0.0
     dependencies:
       '@codemirror/language': 6.4.0
       '@codemirror/state': 6.2.0
@@ -300,7 +304,7 @@ packages:
   /@codemirror/lang-javascript/6.1.2:
     resolution: {integrity: sha512-OcwLfZXdQ1OHrLiIcKCn7MqZ7nx205CMKlhe+vL88pe2ymhT9+2P+QhwkYGxMICj8TDHyp8HFKVwpiisUT7iEQ==}
     dependencies:
-      '@codemirror/autocomplete': 6.4.0
+      '@codemirror/autocomplete': 6.4.0_@codemirror+view@6.7.3
       '@codemirror/language': 6.4.0
       '@codemirror/lint': 6.1.0
       '@codemirror/state': 6.2.0
@@ -322,6 +326,14 @@ packages:
 
   /@codemirror/lint/6.1.0:
     resolution: {integrity: sha512-mdvDQrjRmYPvQ3WrzF6Ewaao+NWERYtpthJvoQ3tK3t/44Ynhk8ZGjTSL9jMEv8CgSMogmt75X8ceOZRDSXHtQ==}
+    dependencies:
+      '@codemirror/state': 6.2.0
+      '@codemirror/view': 6.7.3
+      crelt: 1.0.5
+    dev: false
+
+  /@codemirror/search/6.2.3:
+    resolution: {integrity: sha512-V9n9233lopQhB1dyjsBK2Wc1i+8hcCqxl1wQ46c5HWWLePoe4FluV3TGHoZ04rBRlGjNyz9DTmpJErig8UE4jw==}
     dependencies:
       '@codemirror/state': 6.2.0
       '@codemirror/view': 6.7.3
@@ -898,6 +910,18 @@ packages:
       fsevents: 2.3.2
     dev: true
 
+  /codemirror/6.0.1:
+    resolution: {integrity: sha512-J8j+nZ+CdWmIeFIGXEFbFPtpiYacFMDR8GlHK3IyHQJMCaVRfGx9NT+Hxivv1ckLWPvNdZqndbr/7lVhrf/Svg==}
+    dependencies:
+      '@codemirror/autocomplete': 6.4.0_@codemirror+view@6.7.3
+      '@codemirror/commands': 6.2.0
+      '@codemirror/language': 6.4.0
+      '@codemirror/lint': 6.1.0
+      '@codemirror/search': 6.2.3
+      '@codemirror/state': 6.2.0
+      '@codemirror/view': 6.7.3
+    dev: false
+
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -1272,10 +1296,6 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
-  /monaco-editor/0.34.1:
-    resolution: {integrity: sha512-FKc80TyiMaruhJKKPz5SpJPIjL+dflGvz4CpuThaPMc94AyN7SeC9HQ8hrvaxX7EyHdJcUY5i4D0gNyJj1vSZQ==}
-    dev: false
-
   /ms/2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
     dev: true
@@ -1545,14 +1565,6 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-monaco-editor/1.1.0_monaco-editor@0.34.1:
-    resolution: {integrity: sha512-IvtUqZotrRoVqwT0PBBDIZPNraya3BxN/bfcNfnxZ5rkJiGcNtO5eAOWWSgT7zullIAEqQwxMU83yL9J5k7gww==}
-    peerDependencies:
-      monaco-editor: '>=0.33.0'
-    dependencies:
-      monaco-editor: 0.34.1
-    dev: false
-
   /vite-plugin-optimize-persist/0.1.2_u7j6dssyiw3t7hnn6wki7t4hsu:
     resolution: {integrity: sha512-H/Ebn2kZO8PvwUF08SsT5K5xMJNCWKoGX71+e9/ER3yNj7GHiFjNQlvGg5ih/zEx09MZ9m7WCxOwmEKbeIVzww==}
     peerDependencies:
@@ -1613,7 +1625,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vue-codemirror/6.1.1_vue@3.2.45:
+  /vue-codemirror/6.1.1_vhikcdkubtgbuxk47tdob2ofvi:
     resolution: {integrity: sha512-rTAYo44owd282yVxKtJtnOi7ERAcXTeviwoPXjIc6K/IQYUsoDkzPvw/JDFtSP6T7Cz/2g3EHaEyeyaQCKoDMg==}
     peerDependencies:
       codemirror: 6.x
@@ -1623,6 +1635,7 @@ packages:
       '@codemirror/language': 6.4.0
       '@codemirror/state': 6.2.0
       '@codemirror/view': 6.7.3
+      codemirror: 6.0.1
       vue: 3.2.45
     dev: false
 
