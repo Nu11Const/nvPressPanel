@@ -10,7 +10,7 @@
         </a-breadcrumb>
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
-          <Codemirror v-model="code" :save="save"/>
+          <Codemirror/>
           <a-button type="primary" @click="upload_caddyfile">保存</a-button>
         </a-layout-content>
       </a-layout>
