@@ -11,37 +11,57 @@
       <a-menu   :selectedKeys="[$route.path]"
  theme="dark" router-link mode="inline">
         <a-menu-item key="/nvpress">
-          <user-outlined />
-          <span class="nav-text" router-link>nvPress</span>
+          <icon-font type="icon-wangzhankaifa" />
+          <span class="nav-text" @click="gohome">nvPress</span>
           <router-link to="/nvpress"></router-link>
         </a-menu-item>
         <a-menu-item key="/ftp">
-          <video-camera-outlined />
+          <icon-font type="icon-ftp" />
           <span class="nav-text">FTP</span>
           <router-link to="/ftp"></router-link>
         </a-menu-item>
         <a-menu-item key="/docker">
-          <upload-outlined />
+          <icon-font type="icon-docker" />
           <span class="nav-text">Docker</span>
           <router-link to="/docker"></router-link>
         </a-menu-item>
         <a-menu-item key="/caddy">
-          <user-outlined />
+          <icon-font type="icon-fuwuqi" />
           <span class="nav-text">Caddy</span>
           <router-link to="/caddy"></router-link>
+        </a-menu-item>
+        <a-menu-item>
+          <icon-font type="icon-tuichudenglu" />
+          <span class="nav-text" @click="logout">退出登录</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
 </template>
 <script lang="ts">
+import { createFromIconfontCN } from '@ant-design/icons-vue';
+
+const IconFont = createFromIconfontCN({
+  scriptUrl: '//at.alicdn.com/t/c/font_3868557_yiifda0eozj.js',
+});
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
+  methods:{
+    logout(){
+      this.$cookies.remove("token")
+      this.$cookies.remove("username")
+      this.$router.push("/login")
+    },
+    gohome(){
+      this.$router.push("/")
+    }
+  },
   components: {
     UserOutlined,
     VideoCameraOutlined,
     UploadOutlined,
+    IconFont,
   },
   setup() {
     const onCollapse = (collapsed: boolean, type: string) => {

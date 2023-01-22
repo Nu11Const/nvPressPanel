@@ -2,9 +2,6 @@
   <a-layout>
     <Header/>
     <a-layout>
-      
-      <a-alert message="登录成功" type="success" show-icon closable :after-close="handleClose" v-if="visible"/>
-      <a-alert message="登录失败，用户名或密码错误" type="error" show-icon closable v-if="visible1"/>
       <a-layout style="padding: 0 24px 24px">
         <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>主页</a-breadcrumb-item>
@@ -58,6 +55,7 @@ import cookies from "vue-cookies";
 import { defineComponent, reactive, ref } from 'vue';
 import axios from 'axios'
 import { useRouter } from 'vue-router';
+import { message } from 'ant-design-vue';
 interface FormState {
   username: string;
   password: string;
@@ -93,19 +91,19 @@ export default defineComponent({
                 if(testvalue[2] == true){
                   cookies.set("token",hash,"7d")
                   cookies.set("username",testvalue[0],"7d")
-                  visible.value = true;
+                  message.success("登录成功")
                   
                   router.push({ path : "/"});
 
                 } else if (testvalue[2] == false){
                   cookies.set("token",hash,"1d")
                   cookies.set("username",testvalue[0],"1d")
-                  visible.value = true;
+                  message.success("登录成功")
                   
                   router.push({ path : "/"});
                 }
               } else {
-                visible1.value = true;
+                message.error("登录失败")
               }
             })
             .catch(err=>{

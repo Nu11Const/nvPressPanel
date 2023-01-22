@@ -4,7 +4,7 @@
 
 <script>
 import * as monaco from "monaco-editor";
-
+import axios from 'axios';
 export default {
   props: {
     width: {
@@ -13,7 +13,7 @@ export default {
     },
     height: {
       type: String,
-      default: "300px",
+      default: "70%",
     },
     language: {
       type: String,
@@ -30,7 +30,9 @@ export default {
     this.init();
   },
   methods: {
-    init() {
+    async init() {
+      let response = await axios.get("/api/get_caddyfile")
+      this.value = response.data;
       // 使用 - 创建 monacoEditor 对象
       this.monacoEditor = monaco.editor.create(this.$refs.main, {
         theme: "vs-dark", // 主题

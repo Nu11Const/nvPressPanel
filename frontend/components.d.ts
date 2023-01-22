@@ -35,6 +35,8 @@ declare module '@vue/runtime-core' {
     Header: typeof import('./src/components/header.vue')['default']
     Home: typeof import('./src/components/home.vue')['default']
     Login: typeof import('./src/components/login.vue')['default']
+    MonacoEddirtor: typeof import('./src/components/monaco-eddirtor.vue')['default']
+    MonacoEditor: typeof import('./src/components/monaco-editor.vue')['default']
     Nvpress: typeof import('./src/components/nvpress.vue')['default']
     Nvpress_error: typeof import('./src/components/nvpress_error.vue')['default']
     Restart_docker_service: typeof import('./src/components/restart_docker_service.vue')['default']

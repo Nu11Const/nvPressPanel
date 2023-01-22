@@ -10,7 +10,7 @@
         </a-breadcrumb>
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
-          <Codemirror/>
+          <MonacoEdito ref="html"></MonacoEdito>
           <a-button type="primary" @click="upload_caddyfile">保存</a-button>
         </a-layout-content>
       </a-layout>
@@ -19,11 +19,10 @@
 </template>
 <script type="ts">
 import router from "../router";
-import codemirror from "./codemirror.vue";
-import { defineComponent , ref} from 'vue';
+import { defineComponent , ref , toRaw} from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
-import Codemirror from "./codemirror.vue";
+import MonacoEdito from "./monaco-editor.vue";
 export default defineComponent({
     mounted: function () {
       axios.get("/api/get_caddyfile").then(res=>{
@@ -31,11 +30,14 @@ export default defineComponent({
       })
     },
     methods: {
-      upload_caddyfile(){
+      async upload_caddyfile(){
         let token = cookies.get("token")
-        axios.get(`/api/uploadtext?text=${this.code}&token=${token}`).then(res=>{
-          console.log(res.data)
-        })
+        const data = {
+          token: token,
+          text: toRaw(this.$refs.html.monacoEditor).getValue()
+        }
+        let response = await axios.post("/api/uploadtext",data)
+        console.log(response);
       }
     },
     setup() {
@@ -50,11 +52,7 @@ export default defineComponent({
                 }
             });
         }
-        return{
-          code,
-          save
-        }
     },
-    components: { codemirror }
+    components: { MonacoEdito }
 })
 </script>
