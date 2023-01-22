@@ -20,7 +20,7 @@ import Header from "../components/header.vue"
         </div>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        VMTask ©2021-2023 Created by FlyBox Studios
       </a-layout-footer>
     </a-layout>
     </a-layout>

@@ -1,4 +1,4 @@
-from flask import Flask, redirect, render_template, request 
+from flask import Flask, jsonify, redirect, render_template, request 
 import json
 from flask_cors import CORS, cross_origin
 import os
@@ -60,16 +60,29 @@ def get_caddyfile():
     caddyfile = open("/etc/caddy/Caddyfile", encoding='utf-8').read()
     return(json.dumps(caddyfile))
 
-@app.route("/api/uploadtext",methods=['GET'])
+filelist=[{
+    'token' : '',
+    'text' : ''
+}   
+]
+@app.route("/api/uploadtext",methods=['GET','POST'])
 def uploadtext_file():
-    gettoken = request.args.get('token','')
-    if(open("password.txt", encoding='utf-8').read() ==  gettoken):
-        gettext = request.args.get('text','')
-        with open("/etc/caddy/Caddyfile", 'w') as file_object:
-            file_object.write(gettext)
-        return "200 successful"
-    else:
-         return redirect('/#/error/403')
+        post_data = request.get_json()
+        response_object = {'status': 'success'}
+        if request.method == 'POST':
+            filelist.append({
+                'token': post_data.get('token'),
+                'text': post_data.get('text')
+            })
+            filelist_dic = filelist[-1]
+            if(filelist_dic['token'] == open("password.txt", encoding='utf-8').read()):
+                with open("/etc/caddy/Caddyfile","w") as file:
+                    file.write(filelist_dic['text'])
+            else:
+                response_object['status'] = "403 unauth"
+        else:
+            response_object['data'] = filelist[-1]
+        return jsonify(response_object)
     
 @app.route('/')
 def hello_world():

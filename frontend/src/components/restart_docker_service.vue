@@ -9,13 +9,15 @@
   <script type="js">
   import { defineComponent, ref } from 'vue';
   import axios from 'axios';
+  import cookies from 'vue-cookies'
   export default defineComponent({
     setup() {
       const visible = ref(false);
       const showModal = () => {
         visible.value = true;
         let p = document.getElementById('docker_restart_text')
-        axios.get("/api/restart_docker_service")
+        let token = cookies.get("token")
+        axios.get(`/api/restart_docker_service?token=${cookies.get("token")}`)
             .then(res=>{
               var result = res.data;
               p.innerText = result;
