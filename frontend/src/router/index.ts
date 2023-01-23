@@ -1,5 +1,5 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-
+import nvPress from '../components/nvpress.vue'
 //在Vue-router新版本中，需要使用createRouter来创建路由
 export default createRouter({
   //指定路由的模式，此处只用的是hash模式
@@ -18,7 +18,7 @@ export default createRouter({
     },
     {
         path: '/nvpress',
-        component: () => import('../components/nvpress.vue')
+        component: nvPress
     },
     {
         path: '/ftp',

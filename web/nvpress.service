@@ -1,16 +1,17 @@
 [Unit]
-Description=nvPress Service
+Description=nvpress
 Documentation=https://docs.panda-studio.cn:8282/?shelf=nvPress
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-User=USER
-ExecStart=/usr/bin/java -server -Xms256m -Xmx256m -jar YOUR_JAR_PATH
+User=root
+ExecStart=/usr/bin/python3 /www/nvpresspanel/App.py
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=always
 StandOutput=syslog
+
 
 StandError=inherit
 
