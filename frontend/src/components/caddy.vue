@@ -19,40 +19,39 @@
 </template>
 <script type="ts">
 import router from "../router";
-import { defineComponent , ref , toRaw} from 'vue';
+import { defineComponent, ref, toRaw } from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
 import MonacoEdito from "./monaco-editor.vue";
 export default defineComponent({
-    mounted: function () {
-      axios.get("/api/get_caddyfile").then(res=>{
-        this.code = res.data;
-      })
-    },
-    methods: {
-      async upload_caddyfile(){
-        let token = cookies.get("token")
-        const data = {
-          token: token,
-          text: toRaw(this.$refs.html.monacoEditor).getValue()
-        }
-        let response = await axios.post("/api/uploadtext",data)
-        console.log(response);
+  mounted: async function () {
+    axios.get("/api/get_caddyfile").then(res => {
+      this.code = res.data;
+    })
+  },
+  methods: {
+    async upload_caddyfile() {
+      let token = cookies.get("token")
+      const data = {
+        token: token,
+        text: toRaw(this.$refs.html.monacoEditor).getValue()
       }
-    },
-    setup() {
-        let code = ref("e")
-        if (cookies.isKey("token") == false) {
-            router.push("/login");
+      let response = await axios.post("/api/uploadtext", data)
+      console.log(response);
+    }
+  },
+  setup() {
+    if (cookies.isKey("token") == false) {
+      router.push("/login");
+    }
+    else if (cookies.isKey("token") == true) {
+      axios.get(`/api/get_auth?user=${cookies.get("username")}&password=${cookies.get("token")}`).then(res => {
+        if (res.data == "false") {
+          router.push("/login");
         }
-        else if (cookies.isKey("token") == true) {
-            axios.get(`/api/get_auth?user=${cookies.get("username")}&password=${cookies.get("token")}`).then(res => {
-                if (res.data == "false") {
-                    router.push("/login");
-                }
-            });
-        }
-    },
-    components: { MonacoEdito }
+      });
+    }
+  },
+  components: { MonacoEdito }
 })
 </script>

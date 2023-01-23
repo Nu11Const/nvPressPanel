@@ -31,7 +31,7 @@ def run_nvpress_docker_container():
     gettoken = request.args.get('token','')
     if(open("password.txt", encoding='utf-8').read() ==  gettoken):
         os.system("mkdir -vp /www/nvpress/{themes,content,plugins}")
-        os.system("docker run -d -p 8888:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest")
+        os.system("docker run -d -p 11111:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest")
         return "true"
     else:
          return redirect('/#/error/403')
