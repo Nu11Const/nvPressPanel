@@ -7,10 +7,10 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AAlert: typeof import('ant-design-vue/es')['Alert']
     ABreadcrumb: typeof import('ant-design-vue/es')['Breadcrumb']
     ABreadcrumbItem: typeof import('ant-design-vue/es')['BreadcrumbItem']
     AButton: typeof import('ant-design-vue/es')['Button']
+    ACard: typeof import('ant-design-vue/es')['Card']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ADrawer: typeof import('ant-design-vue/es')['Drawer']
     AForm: typeof import('ant-design-vue/es')['Form']
@@ -28,15 +28,14 @@ declare module '@vue/runtime-core' {
     AResult: typeof import('ant-design-vue/es')['Result']
     ARow: typeof import('ant-design-vue/es')['Row']
     ASpin: typeof import('ant-design-vue/es')['Spin']
+    ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     Caddy: typeof import('./src/components/caddy.vue')['default']
-    Codemirror: typeof import('./src/components/codemirror.vue')['default']
     Docker: typeof import('./src/components/docker.vue')['default']
     Docker_status: typeof import('./src/components/docker_status.vue')['default']
     Ftp: typeof import('./src/components/ftp.vue')['default']
     Header: typeof import('./src/components/header.vue')['default']
     Home: typeof import('./src/components/home.vue')['default']
     Login: typeof import('./src/components/login.vue')['default']
-    MonacoEddirtor: typeof import('./src/components/monaco-eddirtor.vue')['default']
     MonacoEditor: typeof import('./src/components/monaco-editor.vue')['default']
     Nvpress: typeof import('./src/components/nvpress.vue')['default']
     Nvpress_error: typeof import('./src/components/nvpress_error.vue')['default']

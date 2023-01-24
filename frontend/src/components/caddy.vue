@@ -37,7 +37,6 @@ export default defineComponent({
         text: toRaw(this.$refs.html.monacoEditor).getValue()
       }
       let response = await axios.post("/api/uploadtext", data)
-      console.log(response);
     }
   },
   setup() {
