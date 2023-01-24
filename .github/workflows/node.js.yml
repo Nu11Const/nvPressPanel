@@ -21,11 +21,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'    
     - name: Setup pnpm
       # You may pin to the exact commit or the version.
       # uses: pnpm/action-setup@c3b53f6a16e57305370b4ae5a540c2077a1d50dd
@@ -37,6 +32,6 @@ jobs:
         dest: ~/setup-pnpm
         # If specified, run `pnpm install`
         run_install: pnpm install frontend
-    - run: npm ci frontend
-    - run: npm run build --if-present frontend
-    - run: npm test frontend
+    - run: pnpm ci frontend
+    - run: pnpm run build --if-present frontend
+    - run: pnpm test frontend
