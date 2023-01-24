@@ -89,4 +89,5 @@ if __name__=='__main__':
         installVsftpd()
     else:pass
     installCaddy()
+    installPanel()
     
