@@ -12,12 +12,20 @@
             autocomplete="off" @finish="onFinish" @finishFailed="onFinishFailed">
             <a-form-item label="用户名" name="username"
               :rules="[{ required: true, message: 'Please input your username!' }]">
-              <a-input v-model:value="formState.username" />
+              <a-input v-model:value="formState.username">
+                <template #prefix>
+                  <UserOutlined class="site-form-item-icon" />
+                </template>
+              </a-input>
             </a-form-item>
 
             <a-form-item label="密码" name="password"
               :rules="[{ required: true, message: 'Please input your password!' }]">
-              <a-input-password v-model:value="formState.password" />
+              <a-input-password v-model:value="formState.password">
+                <template #prefix>
+                  <LockOutlined class="site-form-item-icon" />
+                </template>
+              </a-input-password>
             </a-form-item>
 
             <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
@@ -41,6 +49,7 @@ import { defineComponent, reactive, ref } from 'vue';
 import axios from 'axios'
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 interface FormState {
   username: string;
   password: string;

@@ -7,7 +7,8 @@ def installdeps():
     if (result == "y"):
         os.system("pip3 config set global.index-url https://mirrors.aliyun.com/pypi/simple/")
     os.system("wget https://get.nvpress.tk/requirements.txt")
-    os.system("pip3 install -r ./requirements.txt")
+    os.system("sudo pip3 install -r ./requirements.txt")
+    os.system("sudo mkdir -p /www/nvpresspanel")
     print("""
             ____                      ____                  _
  _ ____   _|  _ \ _ __ ___  ___ ___  |  _ \ __ _ _ __   ___| |
@@ -27,12 +28,9 @@ def installDocker():
         os.system("curl -fsSL https://get.docker.com | bash")
     
 def installVsftpd():
-    print("\033[1m\033[32m[INFO]\033[0m 正在启动安装Vsftpd......")
-    if(system == "debian"):
-        os.system("sudo apt install vsftpd -y")
-    if(system == "redhat"):
-        os.system("sudo yum install vsftpd -y")
-   
+    print("\033[1m\033[32m[INFO]\033[0m 正在启动安装FTP......")
+    os.system("wget https://get.nvpress.tk/ftp.py -O /www/nvpresspanel/")
+    
 def generateCaddyfileAutoSSL(value1,value2):
     caddyfile =  value1+" {\n  reverse_proxy 127.0.0.1:11111\n  encode gzip\n  tls "+value2+"\n}"
     with open("/etc/caddy/Caddyfile","w") as file:

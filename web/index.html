@@ -7,7 +7,7 @@ function install_debian()
   sudo apt update
   sudo apt install curl wget python3 python3-pip unzip -y
   sudo wget https://get.nvpress.tk/install.py 
-  sudo python3 install.py $system
+  /usr/bin/env sudo python3 install.py debian <&1
 }
 function install_redhat()
 {

@@ -3,6 +3,8 @@ import json
 from flask_cors import CORS, cross_origin
 import os
 from gevent import pywsgi
+
+import threading
 app=Flask(__name__, static_url_path='')
 
 @app.route('/api/list-files', methods=['GET'])
@@ -31,8 +33,8 @@ def run_nvpress_docker_container():
     gettoken = request.args.get('token','')
     if(open("password.txt", encoding='utf-8').read() ==  gettoken):
         os.system("mkdir -vp /www/nvpress/{themes,content,plugins}")
-        os.system("docker run -d -p 11111:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest")
-        return "true"
+        response = os.popen("docker run -d -p 11111:8081 --name=nvPress --restart=always -v /www/nvpress/content:/usr/src/app/nv-content -v /www/nvpress/themes:/usr/src/app/nv-themes -v /www/nvpress/plugins:/usr/src/app/nv-plugins pandastd/nvpress:latest").read()
+        return json.dumps(response)
     else:
          return redirect('/#/error/403')
 
@@ -78,6 +80,7 @@ def uploadtext_file():
             if(filelist_dic['token'] == open("password.txt", encoding='utf-8').read()):
                 with open("/etc/caddy/Caddyfile","w") as file:
                     file.write(filelist_dic['text'])
+                os.system("sudo systemctl reload caddy")
             else:
                 response_object['status'] = "403 unauth"
         else:
@@ -92,7 +95,13 @@ def hello_world():
 def get_docker_status():
     return json.dumps(os.popen("docker version").read())
 
+def ftpservice():
+    os.system("sudo python3 ftp.py")
+
 if __name__ == '__main__':
+    if(os.path.exists("ftp.py") == True):
+        t1 = threading.Thread(target=ftpservice, args=())
+        t1.start()
     server = pywsgi.WSGIServer(('0.0.0.0', 8080), app)
     cors = CORS(app)
     server.serve_forever()
