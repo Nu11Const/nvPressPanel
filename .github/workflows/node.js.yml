@@ -1,38 +1,21 @@
-name: Changesets
+name: pnpm Example Workflow
 on:
   push:
-    branches:
-      - main
-env:
-  CI: true
-  PNPM_CACHE_FOLDER: .pnpm-store
 jobs:
-  version:
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [15]
     steps:
-      - name: checkout code repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: setup node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 14
-      - name: install pnpm
-        run: npm i pnpm@latest -g
-      - name: Setup npmrc
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > .npmrc
-      - name: setup pnpm config
-        run: pnpm config set store-dir $PNPM_CACHE_FOLDER
-      - name: install dependencies
-        run: pnpm install frontend
-      - name: create and publish versions
-        uses: changesets/action@v1
-        with:
-          version: pnpm ci:version frondend
-          commit: "chore: update versions"
-          title: "chore: update versions"
-          publish: pnpm ci:publish frontend
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/checkout@v3
+    - uses: pnpm/action-setup@v2
+      with:
+        version: 7
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+    - name: Install dependencies
+      run: pnpm install frontend
