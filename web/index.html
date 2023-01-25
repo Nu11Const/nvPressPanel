@@ -7,7 +7,7 @@ function install_debian()
   sudo apt update
   sudo apt install curl wget python3 python3-pip unzip tar -y
   sudo wget https://get.nvpress.tk/install.py 
-  /usr/bin/env sudo python3 install.py debian <&1
+  /usr/bin/env sudo python3 install.py $system <&1
 }
 function install_redhat()
 {
@@ -15,7 +15,7 @@ function install_redhat()
   echo -e "\033[1m\033[32m[INFO]\033[0m 检测到Redhat系系统，正在更新Yum......"
   sudo yum install curl wget python3 python3-pip -y
   sudo wget https://get.nvpress.tk/install.py 
-  sudo python3 install.py $system
+  /usr/bin/env sudo python3 install.py $system <&1
 }
 # 判断当前用户是否有sudo权限
 sudo -v &>/dev/null
