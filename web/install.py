@@ -65,8 +65,8 @@ def installCaddy():
 
 def installPanel():
     print("\033[1m\033[32m[INFO]\033[0m 正在启动安装面板主进程......")
-    os.system("sudo wget -O panel.zip https://get.nvpress.tk/panel.zip")
-    os.system("sudo unzip panel.zip -d /www/nvpresspanel")
+    os.system("sudo wget -O panel.tar.gz https://get.nvpress.tk/panel.tar.gz")
+    os.system("sudo tar -xvf  panel.tar.gz -C /www/nvpresspanel")
     os.system("sudo wget https://get.nvpress.tk/nvpress.service -O /etc/systemd/system/nvpress.service")
     os.system("sudo systemctl daemon-reload")
     os.system("sudo systemctl start nvpress")
