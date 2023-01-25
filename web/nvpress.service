@@ -11,7 +11,7 @@ ExecStart=/usr/bin/python3 /www/nvpresspanel/App.py
 ExecStop=/bin/kill -s QUIT $MAINPID
 Restart=always
 StandOutput=syslog
-
+WorkingDirectory=/www/nvpresspanel/
 
 StandError=inherit
 
