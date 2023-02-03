@@ -50,6 +50,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router';
 import { message } from 'ant-design-vue';
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
+import 'ant-design-vue/es/message/style/css'
 interface FormState {
   username: string;
   password: string;
@@ -75,7 +76,7 @@ export default defineComponent({
       console.log('password:', testvalue[1]);
       console.log('remember:',testvalue[2]);*/
       const content2 = testvalue[1];
-      var hash = sha256('123456');
+      var hash = sha256(String(testvalue[1]));
       let submmiturl = `/api/get_auth?user=${testvalue[0]}&password=${hash}`;
       axios.get(submmiturl)
         .then(res => {

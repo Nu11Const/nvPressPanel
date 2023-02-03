@@ -33,6 +33,10 @@ export default createRouter({
       component: () => import("../components/login.vue")
     },
     {
+      path: '/login/success',
+      component: () => import("../components/login_success.vue")
+    },
+    {
       path: '/error/403',
       component: () => import("../errors/403.vue")
     },

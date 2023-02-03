@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@codemirror/lang-cpp": "^6.0.2",
     "@codemirror/lang-javascript": "^6.1.2",
+    "@codemirror/lang-python": "^6.1.1",
     "@codemirror/theme-one-dark": "^6.1.0",
     "@codemirror/view": "^6.7.3",
     "@jridgewell/sourcemap-codec": "^1.4.14",
