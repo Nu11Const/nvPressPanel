@@ -11,10 +11,14 @@
           <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
           <a-result status="success" title="Docker正常运行" sub-title="请点击下方按钮执行操作">
             <template #extra>
-              <div style="margin-left: 40%">
+              <div style="margin-left: 35%">
                 <a-row :gutter="16">
                   <Docker_status />
                   <Restart_docker_service style="margin-left: 1%" />
+                  <a-button style="margin-left: 1%" type="primary" @click="showModal">修改Docker配置文件</a-button>
+                  <a-modal v-model:visible="visible" title="编辑器" @ok="handleOk">
+                    <Docker_config_change />
+                  </a-modal>
                 </a-row>
               </div>
 
@@ -25,15 +29,28 @@
     </a-layout>
   </a-layout>
 </template>
-<script lang="js">
+<script lang="ts">
 import router from "../router";
-import { defineComponent } from 'vue';
+import { defineComponent , ref} from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
 import Docker_status from "./docker_status.vue";
 import Restart_docker_service from "./restart_docker_service.vue";
+import docker_config_change from "./docker_config_change.vue";
+import Docker_config_change from "./docker_config_change.vue";
+import Docker_config_change from "./docker_config_change.vue";
 export default defineComponent({
   setup() {
+    const visible = ref<boolean>(false);
+
+    const showModal = () => {
+      visible.value = true;
+    };
+
+    const handleOk = (e: MouseEvent) => {
+      console.log(e);
+      visible.value = false;
+    };
     if (cookies.isKey("token") == false) {
       router.push("/login");
     } else if (cookies.isKey("token") == true) {
@@ -42,8 +59,13 @@ export default defineComponent({
           router.push("/login");
         }
       })
+      return {
+        visible,
+        showModal,
+        handleOk,
+      }
     }
   },
-  components: { Docker_status, Restart_docker_service }
+  components: { Docker_status, Restart_docker_service, Docker_config_change, Docker_config_change }
 })
 </script>

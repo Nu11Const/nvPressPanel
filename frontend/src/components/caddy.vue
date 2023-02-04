@@ -11,7 +11,6 @@
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
           <Codemirror ref="html"></Codemirror>
-          <a-button type="primary" @click="upload_caddyfile">保存</a-button>
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -22,23 +21,23 @@ import router from "../router";
 import { defineComponent, ref, toRaw } from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
-import Codemirror from "./codemirror.vue";
+import Codemirror from "./codemirror_caddyfile.vue";
 export default defineComponent({
   mounted: async function () {
     axios.get("/api/get_caddyfile").then(res => {
       this.code = res.data;
     })
   },
-  methods: {
+  /*methods: {
     async upload_caddyfile() {
-      /*let token = cookies.get("token")
+      let token = cookies.get("token")
       const data = {
         token: token,
         text: toRaw(this.$refs.codemirror.).getValue()
       }
-      let response = await axios.post("/api/uploadtext", data)*/
+      let response = await axios.post("/api/uploadtext", data)
     }
-  },
+  },*/
   setup() {
     if (cookies.isKey("token") == false) {
       router.push("/login");

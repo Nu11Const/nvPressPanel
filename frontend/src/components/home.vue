@@ -19,6 +19,7 @@ import Header from "../components/header.vue"
             </p>
             <p></p>
           </div>
+          <a-button @click="changetheme">黑暗</a-button>
         </a-layout-content>
         <a-layout-footer style="text-align: center">
           VMTask ©2021-2023 Created by FlyBox Studios
@@ -33,6 +34,14 @@ import { defineComponent } from 'vue';
 import cookies from "vue-cookies";
 import axios from 'axios'
 export default defineComponent({
+  methods: {
+    changetheme() {
+      const toggleTheme = (scopeName = "theme-default") => {
+        document.documentElement.className = scopeName;
+      };
+      console.log("已切换为黑暗主题");
+    }
+  },
   setup() {
     if (cookies.isKey("token") == false) {
       router.push("/login");
@@ -56,3 +65,6 @@ fetch('https://v1.hitokoto.cn')
     //this.$cookies.set("login_status", "true", {expires: "7D"});
 </script>
 
+<style>
+
+</style>

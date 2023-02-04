@@ -3,7 +3,6 @@ import json
 from flask_cors import CORS, cross_origin
 import os
 from gevent import pywsgi
-
 import threading
 app=Flask(__name__, static_url_path='')
 
@@ -62,6 +61,12 @@ def get_caddyfile():
     caddyfile = open("/etc/caddy/Caddyfile", encoding='utf-8').read()
     return(json.dumps(caddyfile))
 
+@app.route('/api/get_docker_daemon',methods=['GET'])
+def get_caddyfile():
+    daemon = open("/etc/docker/daemon.json", encoding='utf-8').read()
+    return(json.dumps(daemon))
+
+
 filelist=[{
     'token' : '',
     'text' : ''
@@ -87,6 +92,18 @@ def uploadtext_file():
             response_object['data'] = filelist[-1]
         return jsonify(response_object)
     
+    
+@app.route("/api/uploadtext_docker",methods=['GET','POST'])
+def uploadtext_file_docker():
+        post_data = request.get_json()
+        response_object = {'status': 'success'}
+        if(post_data.get('token') == open("password.txt",encoding='utf-8').read()):
+            with open("/etc/docker/daemon.json","w") as file:
+                file.write(post_data.get('text'))
+        else:
+            response_object['status'] = "403 unauth"
+        return jsonify(response_object)
+    
 @app.route('/')
 def hello_world():
     return render_template("index.html")
@@ -95,12 +112,11 @@ def hello_world():
 def get_docker_status():
     return json.dumps(os.popen("docker version").read())
 
-def ftpservice():
-    os.system("sudo python3 ftp.py")
 
 if __name__ == '__main__':
-    if(os.path.exists("ftp.py") == True):
-        t1 = threading.Thread(target=ftpservice, args=())
+    if(os.path.exists("pyftp.py") == True):
+        import pyftp
+        t1 = threading.Thread(target=pyftp.main, args=())
         t1.start()
     server = pywsgi.WSGIServer(('0.0.0.0', 8080), app)
     cors = CORS(app)

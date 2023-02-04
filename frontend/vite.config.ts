@@ -4,6 +4,10 @@ import Components from 'unplugin-vue-components/vite';
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import OptimizationPersist from "vite-plugin-optimize-persist";
 import PkgConfig from "vite-plugin-package-config";
+
+import path from "path";
+import themePreprocessorPlugin from "@zougt/vite-plugin-theme-preprocessor";
+
 // https://vitejs.dev/config/
 export default defineConfig({
   /* ... */
@@ -14,6 +18,24 @@ export default defineConfig({
     vue(),
     PkgConfig(),
     OptimizationPersist(),
+    themePreprocessorPlugin({
+      // 使用Less
+      less: {
+        // 此处配置自己的主题文件
+        multipleScopeVars: [
+          {
+            scopeName: "theme-default",
+            path: path.resolve("src/assets/theme/default.less"),
+          },
+          {
+            scopeName: "theme-dark",
+            path: path.resolve("src/assets/theme/dark.less"),
+          },
+        ],
+        defaultScopeName: "theme-default", // 默认取 multipleScopeVars[0].scopeName
+        extract: false,// 在生产模式是否抽取独立的主题css文件
+      },
+    }),
   ],
   optimizeDeps: {
     include: ["ant-design-vue","ant-design-vue/dist/antd.css","@ant-design/icons-vue"]
