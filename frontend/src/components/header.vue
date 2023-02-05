@@ -3,7 +3,7 @@
     <div class="logo">
         <a style="display:block;text-align: center;font-size: 20px;" href="/#/"> <img src="/nvpress_logo.svg"/> nvPressPanel</a>
     </div>
-    <a-menu :selectedKeys="[$route.path]" theme="light" router-link mode="inline" style="margin-top:25px">
+    <a-menu id="main-menu" :selectedKeys="[$route.path]" theme="light" router-link mode="inline" style="margin-top:25px">
       <a-menu-item key="/nvpress">
         <icon-font type="icon-wangzhankaifa" />
         <span class="nav-text">nvPress</span>
