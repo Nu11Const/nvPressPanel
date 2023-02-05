@@ -1,0 +1,22 @@
+{
+  "name": "nvpresspanel",
+  "version": "1.0.0",
+  "description": "一个nvPress的管理面板",
+  "main": "deploy.sh",
+  "scripts": {
+    "test": "echo \"此程序没有测试命令。\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VMTask/nvPressPanel.git"
+  },
+  "keywords": [
+    "Panel"
+  ],
+  "author": "VMTask",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/VMTask/nvPressPanel/issues"
+  },
+  "homepage": "https://github.com/VMTask/nvPressPanel#readme"
+}
