@@ -62,7 +62,7 @@ def get_caddyfile():
     return(json.dumps(caddyfile))
 
 @app.route('/api/get_docker_daemon',methods=['GET'])
-def get_caddyfile():
+def get_docker_daemon():
     daemon = open("/etc/docker/daemon.json", encoding='utf-8').read()
     return(json.dumps(daemon))
 

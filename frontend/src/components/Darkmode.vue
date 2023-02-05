@@ -1,14 +1,8 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-
-import './assets/main.css'
-import router from './router/index'
-import VueCookies from 'vue-cookies'
-import Darkmode from "./components/Darkmode.vue"
-
-createApp(App).use(router).use(VueCookies).mount('#app')
-
-const themeMedia = window.matchMedia("(prefers-color-scheme: light)");
+<template>
+    <a-button type="primary" @click="setDark($event)">夜间模式</a-button>
+</template>
+<script>
+import { defineComponent } from 'vue';
 export const DarkMode = (isDark) => {
     if (isDark) {
         //import("../assets/theme/dark.less")
@@ -47,8 +41,18 @@ export const changeCss = (css, value) => {
     const body = document.body.style;
     body.setProperty(css, value);
 };
-if (themeMedia.matches) {
-    DarkMode(false)
-} else {
-    DarkMode(true)
-}
+export default defineComponent({
+    methods: {
+        setDark(e) {
+            if (e.target.innerHTML === "夜间模式") {
+                DarkMode(true);
+                 e.target.innerHTML = "白昼模式";
+            } else {
+                DarkMode(false);
+                e.target.innerHTML = "夜间模式";
+            }
+
+        }
+    }
+})
+</script>

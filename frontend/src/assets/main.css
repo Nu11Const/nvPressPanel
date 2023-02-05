@@ -1,0 +1,58 @@
+:root{
+    --page-bg-color: #fff;
+    --head-bg-color: rgba(255, 255, 255, 0.7);
+    --text-color:rgba(0, 0, 0, 0.85);
+    --line-color: #e8e8e8;
+    --content-bg-color:#f0f2f5;
+    --font-color:black !important;
+}
+
+.ant-layout-sider-children {
+    background: var(--silde-bg-color) !important;
+}
+.ant-btn {
+    border-color: var(--ant-btn-color) !important;
+    background: var(--ant-btn-color) !important; 
+}
+.ant-menu {
+    background-color: var(--menu-color) !important;
+}
+span {
+    color: var(--text-color) !important
+}
+ul {
+    background-color: var(--silde-bg-color) !important;
+}
+a {
+    color: var(--text-color)!important;
+}
+.ant-btn > span{
+    color: white !important
+}
+.ant-layout {
+    background: var(--silde-bg-color) !important;
+}
+.ant-layout-header {
+    background: var(--page-bg-color) !important;
+}
+.ant-layout-content {
+    background: var(--silde-bg-color) !important;
+}
+.content {
+    background: var(--page-bg-color) !important;
+}
+.ant-layout-footer {
+    background: var(--page-bg-color) !important;
+}
+.ant-result-title {
+    color:var(--text-color)!important;
+}
+.ant-result-subtitle {
+    color:var(--text-color)!important;
+}
+.cm-line > span {
+    color: white !important
+}
+label {
+    color:var(--text-color)!important;
+}

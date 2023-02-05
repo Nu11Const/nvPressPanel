@@ -18,24 +18,6 @@ export default defineConfig({
     vue(),
     PkgConfig(),
     OptimizationPersist(),
-    themePreprocessorPlugin({
-      // 使用Less
-      less: {
-        // 此处配置自己的主题文件
-        multipleScopeVars: [
-          {
-            scopeName: "theme-default",
-            path: path.resolve("src/assets/theme/default.less"),
-          },
-          {
-            scopeName: "theme-dark",
-            path: path.resolve("src/assets/theme/dark.less"),
-          },
-        ],
-        defaultScopeName: "theme-default", // 默认取 multipleScopeVars[0].scopeName
-        extract: false,// 在生产模式是否抽取独立的主题css文件
-      },
-    }),
   ],
   optimizeDeps: {
     include: ["ant-design-vue","ant-design-vue/dist/antd.css","@ant-design/icons-vue"]
@@ -48,6 +30,13 @@ export default defineConfig({
 				rewrite: path => path.replace(/^\/api/, '')
 			}
 		} 
+  },
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
   },
   build: {
     sourcemap: false,

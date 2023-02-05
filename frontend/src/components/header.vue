@@ -1,7 +1,7 @@
 <template>
   <a-layout-sider breakpoint="lg" collapsed-width="0" @collapse="onCollapse" @breakpoint="onBreakpoint" theme="light">
     <div class="logo">
-        <a style="color:black;display:block;text-align: center;font-size: 20px;" href="/#/"> <img src="/nvpress_logo.svg"/> nvPressPanel</a>
+        <a style="display:block;text-align: center;font-size: 20px;" href="/#/"> <img src="/nvpress_logo.svg"/> nvPressPanel</a>
     </div>
     <a-menu :selectedKeys="[$route.path]" theme="light" router-link mode="inline" style="margin-top:25px">
       <a-menu-item key="/nvpress">
@@ -29,17 +29,17 @@
         <span class="nav-text">退出登录</span>
       </a-menu-item>
     </a-menu>
+    <Darkmode ></Darkmode>
   </a-layout-sider>
 </template>
 <script lang="ts">
 import { createFromIconfontCN } from '@ant-design/icons-vue';
-
+import Darkmode from './Darkmode.vue';
 const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/c/font_3868557_bfhkismrdf.js',
 });
 import { UserOutlined, VideoCameraOutlined, UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-
 export default defineComponent({
   methods: {
     logout() {
@@ -49,6 +49,9 @@ export default defineComponent({
     },
     gohome() {
       this.$router.push("/")
+    },
+    setDarkMode() {
+      DarkMode(false);
     }
   },
   components: {
