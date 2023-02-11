@@ -30,7 +30,8 @@ export default {
   },
   async created() {
     let response = await axios.post("/api/get_performance");
-    console.log(response["cpu"]);
+    console.log(response.data["memory"] / 100);
+    this.setpercent(response.data["memory"] / 100);
 
   }
 }
