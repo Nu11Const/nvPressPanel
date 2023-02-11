@@ -46,9 +46,15 @@ export default defineComponent({
         setDark(e) {
             if (e.target.innerHTML === "夜间模式") {
                 DarkMode(true);
+                document.getElementsById("main-menu")[0].removeAttribute("ant-menu-dark");
+                let obj = document.getElementById("main-menu");
+                obj.setAttribute('ant-menu-light','');
                  e.target.innerHTML = "白昼模式";
             } else {
                 DarkMode(false);
+                document.getElementsById("main-menu")[0].removeAttribute("ant-menu-light");
+                let obj = document.getElementById("main-menu");
+                obj.setAttribute('ant-menu-dark','');
                 e.target.innerHTML = "夜间模式";
             }
 
