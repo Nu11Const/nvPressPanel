@@ -4,6 +4,7 @@ from flask_cors import CORS, cross_origin
 import os
 from gevent import pywsgi
 import threading
+from psutil import *
 app=Flask(__name__, static_url_path='')
 
 @app.route('/api/list-files', methods=['GET'])
@@ -26,6 +27,13 @@ def get_auth():
         return json.dumps("true")
     else:
         return json.dumps("false")
+    
+@app.route("/api/get_performance",methods=['POST'])
+def get_performance():
+    cpu = cpu_percent(interval=2)
+    memory = virtual_memory()[2]
+    response = {"status": "200","cpu":cpu,"memory": memory}
+    return jsonify(response)
     
 @app.route('/api/run_nvpress_docker_container',methods=['GET'])
 def run_nvpress_docker_container():
