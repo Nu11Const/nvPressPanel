@@ -10,6 +10,10 @@ export default createRouter({
       path: '/',
       //import里边写组件地址
       component: () => import('../pages/Home.vue')
+    },
+    {
+      path: '/auth/login',
+      component: () => import('../pages/Login.vue')
     }
   ]
 })
