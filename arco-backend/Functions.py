@@ -1,15 +1,20 @@
 from psutil import *
 from fastapi import FastAPI
+from starlette.requests import Request
+from starlette.staticfiles import StaticFiles
+from starlette.templating import Jinja2Templates
 from pydantic import BaseModel
 app = FastAPI()
 import json
- 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
 @app.get("/api/index")
-def info():
+async def info():
     return {"status": "200","message":"欢迎进入nvPressPanel后端"}
 
 @app.post("/api/get_performance")
-def get_performance():
+async def get_performance():
     cpu = round(cpu_percent(interval=2))
     memory = round(virtual_memory()[2])
     response = {"status": "200","cpu":cpu,"memory": memory}
@@ -20,7 +25,7 @@ class LoginForm(BaseModel):
     password: str
 
 @app.post("/api/auth/login")
-def login(login:LoginForm):
+async def login(login:LoginForm):
     response = {"status":"200","message":"successful"}
     with open('config.json', 'r') as f:
         config = json.load(f)
@@ -32,3 +37,6 @@ def login(login:LoginForm):
         return response    
     
     
+@app.get("/")
+async def index(request: Request):
+	return templates.TemplateResponse("index.html", {"request": request})
