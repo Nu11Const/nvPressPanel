@@ -15,7 +15,7 @@
     <a-layout-footer style="color: var(--color-text-1)">Footer</a-layout-footer>
   </a-layout>
 </template>
-<script>
+<script lang="ts">
 import { ref } from 'vue';
 import axios from 'axios'
 import { Notification } from '@arco-design/web-vue'
