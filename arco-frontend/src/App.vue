@@ -46,7 +46,7 @@
       </a-layout>
   </a-layout>
 </template>
-<script>
+<script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { Message } from '@arco-design/web-vue';
 import { IconMoonFill, IconCheckCircle } from '@arco-design/web-vue/es/icon';
