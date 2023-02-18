@@ -6,16 +6,16 @@
     </a-breadcrumb>
     <a-layout-content style="color: var(--color-text-1)">
       <a-space class="performance">
-        <a-progress type="circle" :percent="percent" size="large"/>
-      内存
-      <a-progress type="circle" :percent="percent1" size="large"/>
-      CPU
+        <a-progress type="circle" :percent="percent" size="large" />
+        内存
+        <a-progress type="circle" :percent="percent1" size="large" />
+        CPU
       </a-space>
     </a-layout-content>
     <a-layout-footer style="color: var(--color-text-1)">Footer</a-layout-footer>
   </a-layout>
 </template>
-<script lang="ts">
+<script lang="js">
 import { ref } from 'vue';
 import axios from 'axios'
 import { Notification } from '@arco-design/web-vue'
@@ -44,19 +44,19 @@ export default {
         let response = await axios.post("/api/get_performance")
         this.setpercent(response.data["memory"] / 100);
         this.setpercent1(response.data["cpu"] / 100);
-        
+
       } catch (error) {
         Notification.error({
-          title:'错误',
-          content:error['message'],
+          title: '错误',
+          content: error['message'],
           closable: true,
         })
       }
     },
   },
-  async created() {
+  async mounted() {
     this.timer = window.setInterval(() => {
-      setTimeout(()=> {
+      setTimeout(() => {
         this.getProformance()
       }, 0)
     }, 3000)

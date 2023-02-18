@@ -14,6 +14,38 @@ export default createRouter({
     {
       path: '/auth/login',
       component: () => import('../pages/Login.vue')
+    },
+    {
+      path: '/nvpress',
+      component: () => import("../pages/nvPress.vue")
+    },
+    {
+      path: '/ftp',
+      component: () => import("../pages/FTP.vue")
+    },
+    {
+      path: '/caddy',
+      component: () => import("../pages/Caddy.vue")
+    },
+    {
+      path: '/docker',
+      component: () => import("../pages/Docker.vue")
+    },
+    {
+      path: '/settings/caddy',
+      component: () => import("../pages/Caddy_settings.vue")
+    },
+    {
+      path: '/settings/docker',
+      component: () => import("../pages/Docker_settings.vue")
+    },
+    {
+      path: '/settings/system',
+      component: () => import("../pages/System_settings.vue")
+    },
+    {
+      path: '/:catchAll(.*)',
+      component: () => import("../errors/404.vue")
     }
   ]
 })

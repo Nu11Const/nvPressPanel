@@ -17,25 +17,31 @@
                     <a-button html-type="submit">提交</a-button>
                 </a-form-item>
             </a-form>
-            {{ form }}
         </a-layout-content>
         <a-layout-footer style="color: var(--color-text-1)">Footer</a-layout-footer>
     </a-layout>
 
 </template>
-<script>
+<script lang="js">
 import { reactive } from 'vue';
 import axios from 'axios'
 import { Notification } from '@arco-design/web-vue'
 import '@arco-design/web-vue/es/notification/style/css.js'
+import { sha256 } from 'js-sha256'
+import { useRoute, useRouter } from 'vue-router'
 export default {
     setup() {
+        const route = useRoute()
+        const router = useRouter()
         const form = reactive({
             username: '',
             password: '',
         });
-        const handleSubmit = (data) => {
-            axios.post("/api/auth/login", data.values).then(res => {
+        const handleSubmit = data => {
+            axios.post("/api/auth/login", {
+                "username": data.values["username"],
+                "password": sha256(data.values["password"])
+            }).then(res => {
                 console.log(res)
                 if (res.data["status"] == "403") {
                     Notification.warning({
@@ -49,6 +55,9 @@ export default {
                         content: "登录成功",
                         closable: true,
                     })
+                    $cookies.set("token", sha256(data.values["password"]))
+                    $cookies.set("username", data.values["username"])
+                    router.push("/")
                 } else {
                     Notification.error({
                         title: '错误',
