@@ -6,7 +6,7 @@ from starlette.templating import Jinja2Templates
 from pydantic import BaseModel
 app = FastAPI()
 import json
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/api/index")

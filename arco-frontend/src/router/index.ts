@@ -44,6 +44,10 @@ export default createRouter({
       component: () => import("../pages/System_settings.vue")
     },
     {
+      path: '/auth/logout',
+      component: () => import("../components/Logout.vue")
+    },
+    {
       path: '/:catchAll(.*)',
       component: () => import("../errors/404.vue")
     }

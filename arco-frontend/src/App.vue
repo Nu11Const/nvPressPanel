@@ -1,7 +1,7 @@
 <template>
   <a-layout class="layout-demo" id="layout">
     <a-layout-sider hide-trigger collapsible :collapsed="collapsed">
-      <div class="logo"><a href="/#/" style="" class="logo_a"><img src="/nvpress_logo.svg"></a></div>
+      <div class="logo"><a href="/#/" style="" class="logo_a"><img src="/assets/nvpress_logo.svg"></a></div>
       <a-menu :defaultOpenKeys="['1']" :defaultSelectedKeys="['0_3']" :style="{ width: '100%' }"
         @menuItemClick="onClickMenuItem">
         <a-menu-item key="/">
