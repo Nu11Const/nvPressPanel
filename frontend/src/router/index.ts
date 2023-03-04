@@ -1,5 +1,4 @@
 import {createRouter, createWebHashHistory} from 'vue-router'
-import nvPress from '../components/nvpress.vue'
 //在Vue-router新版本中，需要使用createRouter来创建路由
 export default createRouter({
   //指定路由的模式，此处只用的是hash模式
@@ -10,35 +9,43 @@ export default createRouter({
       //设置根目录
       path: '/',
       //import里边写组件地址
-      component: () => import('../components/home.vue')
+      component: () => import('../pages/Home.vue')
     },
     {
-        path: '/caddy',
-        component: () => import('../components/caddy.vue')
+      path: '/auth/login',
+      component: () => import('../pages/Login.vue')
     },
     {
-        path: '/nvpress',
-        component: nvPress
+      path: '/nvpress',
+      component: () => import("../pages/nvPress.vue")
     },
     {
-        path: '/ftp',
-        component: () => import('../components/ftp.vue')
+      path: '/ftp',
+      component: () => import("../pages/FTP.vue")
     },
     {
-        path: '/docker',
-        component: () => import('../components/docker.vue')
+      path: '/caddy',
+      component: () => import("../pages/Caddy.vue")
     },
     {
-      path: '/login',
-      component: () => import("../components/login.vue")
+      path: '/docker',
+      component: () => import("../pages/Docker.vue")
     },
     {
-      path: '/login/success',
-      component: () => import("../components/login_success.vue")
+      path: '/settings/caddy',
+      component: () => import("../pages/Caddy_settings.vue")
     },
     {
-      path: '/error/403',
-      component: () => import("../errors/403.vue")
+      path: '/settings/docker',
+      component: () => import("../pages/Docker_settings.vue")
+    },
+    {
+      path: '/settings/system',
+      component: () => import("../pages/System_settings.vue")
+    },
+    {
+      path: '/auth/logout',
+      component: () => import("../components/Logout.vue")
     },
     {
       path: '/:catchAll(.*)',
