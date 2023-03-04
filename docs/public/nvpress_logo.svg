@@ -1,0 +1,112 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" xml:space="preserve">
+	<style>
+	:root {
+		--primary-color: #007dff;
+		--bg-color: #f0f2f7;
+	}
+	</style>
+	<rect width="7" height="23" rx="3.5" fill="url(#logo-gradient-1)" stroke="var(--bg-color)" transform="translate(4 5) rotate(10)" />
+	<rect width="7" height="25" rx="3.5" fill="url(#logo-gradient-2)" stroke="var(--bg-color)" transform="translate(2.1 7.7) rotate(-28.65)" />
+	<rect width="7" height="23" rx="3.5" fill="url(#logo-gradient-4)" stroke="var(--bg-color)" transform="translate(24 5) rotate(10)" />
+	<rect width="7" height="25" rx="3.5" fill="url(#logo-gradient-3)" stroke="var(--bg-color)" transform="translate(10.6 7.7) rotate(-28.65)" />
+	<linearGradient id="logo-gradient-1" x1="0" y1=".2" x2="0" y2="4.2">
+		<stop offset="0%" stop-color="var(--primary-color)" />
+		<stop offset="25%" stop-color="#4cdbff" />
+		<stop offset="50%" stop-color="var(--primary-color)" />
+		<stop offset="75%" stop-color="#4cdbff" />
+		<stop offset="100%" stop-color="var(--primary-color)" />
+		<animate
+		attributeName="y1"
+		values=".2;-1.8;-1.8"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		repeatCount="indefinite" />
+		<animate
+		attributeName="y2"
+		values="4.2;2.2;2.2"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		repeatCount="indefinite" />
+	</linearGradient>
+	<linearGradient id="logo-gradient-2" x1="0" y1="-2" x2="0" y2="2">
+		<stop offset="0%" stop-color="#4cdbff" />
+		<stop offset="25%" stop-color="var(--primary-color)" />
+		<stop offset="50%" stop-color="#4cdbff" />
+		<stop offset="75%" stop-color="var(--primary-color)" />
+		<stop offset="100%" stop-color="#4cdbff" />
+		<animate
+		class="logo_animate"
+		attributeName="y1"
+		values="-2;0;0"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="0.4"
+		repeatCount="indefinite" />
+		<animate
+		class="logo_animate"
+		attributeName="y2"
+		values="2;4;4"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="0.4s"
+		repeatCount="indefinite" />
+	</linearGradient>
+	<linearGradient id="logo-gradient-3" x1="0" y1="-2" x2="0" y2="2">
+		<stop offset="0%" stop-color="#4cdbff" />
+		<stop offset="25%" stop-color="var(--primary-color)" />
+		<stop offset="50%" stop-color="#4cdbff" />
+		<stop offset="75%" stop-color="var(--primary-color)" />
+		<stop offset="100%" stop-color="#4cdbff" />
+		<animate
+		attributeName="y1"
+		values="-2;0;0"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="0.8s"
+		repeatCount="indefinite" />
+		<animate
+		attributeName="y2"
+		values="2;4;4"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="0.8s"
+		repeatCount="indefinite" />
+	</linearGradient>
+	<linearGradient id="logo-gradient-4" x1="0" y1="0" x2="0" y2="4">
+		<stop offset="0%" stop-color="var(--primary-color)" />
+		<stop offset="25%" stop-color="#4cdbff" />
+		<stop offset="50%" stop-color="var(--primary-color)" />
+		<stop offset="75%" stop-color="#4cdbff" />
+		<stop offset="100%" stop-color="var(--primary-color)" />
+		<animate
+		attributeName="y1"
+		values="0;-2;-2"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="1.2s"
+		repeatCount="indefinite" />
+		<animate
+		attributeName="y2"
+		values="4;2;2"
+		calcMode="spline"
+		keyTimes="0;0.6;1"
+		keySplines="0.5 0 0.5 1;0.5 0 0.5 1"
+		dur="4.5s"
+		begin="1.2s"
+		repeatCount="indefinite" />
+	</linearGradient>
+</svg>
