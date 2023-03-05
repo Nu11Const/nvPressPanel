@@ -4,11 +4,28 @@ from starlette.requests import Request
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 from pydantic import BaseModel
+import os
+import sys
 from typing import Optional
 app = FastAPI()
 import json
 app.mount("/assets", StaticFiles(directory="assets"), name="assets")
 templates = Jinja2Templates(directory="templates")
+
+
+@app.post("/api/restart_server")
+def restart(token: Optional[str] = Cookie(None)):
+    response = {"status":"200","message":"successful"}
+    ftoken = open("config.json")
+    fjtoken = json.load(ftoken)
+    if(fjtoken["auth"]["password"] == token):
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+    else:
+        response["status"] = "403"
+        response["message"] = "unauth"
+    ftoken.close()
+    return response
 
 @app.get("/api/index")
 async def info():
@@ -33,6 +50,25 @@ async def change_username(username:ChangeUsernameForm,token: Optional[str] = Coo
     ftoken.close()
     return response
     
+
+class ChangePortForm(BaseModel):
+    port: str
+
+@app.post("/api/change_port")
+async def change_port(port:ChangePortForm,token: Optional[str] = Cookie(None)):
+    response = {"status":"200","message":"successful"}
+    ftoken = open("config.json")
+    fjtoken = json.load(ftoken)
+    if(fjtoken["auth"]["password"] == token):
+        fjtoken["port"] = port.port
+        output = open("config.json","w")
+        output.write(json.dumps(fjtoken))
+        output.close
+    else:
+        response["status"] = "403"
+        response["message"] = "unauth"
+        ftoken.close()
+    return response
     
 
 

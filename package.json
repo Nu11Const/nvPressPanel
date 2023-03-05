@@ -4,7 +4,9 @@
   "description": "一个nvPress的管理面板",
   "main": "deploy.sh",
   "scripts": {
-    "test": "echo \"此程序没有测试命令。\""
+    "test": "echo \"此程序没有测试命令。\"",
+    "dev": "cd backend && poetry run python App.py",
+    "backend": "cd backend && poetry install"
   },
   "repository": {
     "type": "git",

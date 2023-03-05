@@ -17,14 +17,21 @@
 </template>
 <script>
 import { reactive } from 'vue';
-
+import axios from "axios"
 export default {
     setup() {
         const form = reactive({
             port: ''
         });
         const handleSubmit = (data) => {
-            
+            axios.post("/api/change_port",data.values).then(res=>{
+                console.log(res)
+            }).catch(error => Notification.error({
+                title: '错误',
+                content: error['message'],
+                closable: true,
+            }))
+            axios.post("/api/restart_server")
         };
 
         return {
