@@ -30,6 +30,7 @@
           <a-menu-item key="/settings/docker">Docker设置</a-menu-item>
           <a-menu-item key="/settings/caddy">Caddy设置</a-menu-item>
           <a-menu-item key="/auth/logout">退出登录</a-menu-item>
+          <Job ></Job>
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>
@@ -41,6 +42,7 @@
         </a-button>
         nvPressPanel - Dev
         <a-button type="primary" style="margin-left:70%" @click="darkMode($event)">暗黑模式</a-button>
+        <Job />
       </a-layout-header>
       <router-view></router-view>
     </a-layout>
@@ -51,6 +53,7 @@ import { defineComponent, ref } from 'vue';
 import { Message } from '@arco-design/web-vue';
 import { IconMoonFill, IconCheckCircle } from '@arco-design/web-vue/es/icon';
 import '@arco-design/web-vue/es/message/style/css.js'
+import Job from './components/Job.vue';
 import {
   IconCaretRight,
   IconCaretLeft,
