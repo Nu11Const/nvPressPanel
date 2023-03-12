@@ -1,9 +1,11 @@
 import { createApp } from 'vue'
+import './style.css'
 import App from './App.vue'
-
-import './assets/main.css'
 import router from './router/index'
 import VueCookies from 'vue-cookies'
-
-
-createApp(App).use(router).use(VueCookies).mount('#app')
+import { useRoute, useRouter } from 'vue-router'
+const vm = createApp(App)
+vm.config.globalProperties.$http =VueCookies;
+vm.use(router)
+vm.use(VueCookies)
+vm.mount('#app')
